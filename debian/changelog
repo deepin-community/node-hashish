@@ -1,0 +1,17 @@
+node-hashish (0.0.4+git34dfe43-1.1) unstable; urgency=medium
+
+  * Non maintainer upload by the Reproducible Builds team.
+  * No source change upload to rebuild on buildd with .buildinfo files.
+
+ -- Holger Levsen <holger@debian.org>  Tue, 29 Dec 2020 03:36:33 +0100
+
+node-hashish (0.0.4+git34dfe43-1) unstable; urgency=low
+
+  [ Paul Tagliamonte ]
+  * First debianization
+
+  [ Bastien Roucariès ]
+  * Initial release (Closes: #797837)
+  * Use last git release due to license change.
+
+ -- Bastien Roucariès <roucaries.bastien+debian@gmail.com>  Wed, 02 Sep 2015 22:58:37 +0200
