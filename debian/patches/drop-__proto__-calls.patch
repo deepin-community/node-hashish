@@ -1,0 +1,79 @@
+Description: drop __proto__ calls
+Author: Yadd <yadd@debian.org>
+Forwarded: no
+Last-Update: 2022-12-01
+
+--- a/index.js
++++ b/index.js
+@@ -15,8 +15,10 @@
+     
+     var self = {
+         map : function (f) {
+-            var acc = { __proto__ : hash.__proto__ };
++            var acc = new Object();
++            Object.setPrototypeOf(acc, Object.getPrototypeOf(hash));
+             Object.keys(hash).forEach(function (key) {
++                if (key !== '__proto__')
+                 acc[key] = f.call(self, hash[key], key);
+             });
+             return Hash(acc);
+@@ -28,9 +30,10 @@
+             return self;
+         },
+         filter : function (f) {
+-            var acc = { __proto__ : hash.__proto__ };
++            var acc = new Object();
++            Object.setPrototypeOf(acc, Object.getPrototypeOf(hash));
+             Object.keys(hash).forEach(function (key) {
+-                if (f.call(self, hash[key], key)) {
++                if (key !== '__proto__' && f.call(self, hash[key], key)) {
+                     acc[key] = hash[key];
+                 }
+             });
+@@ -170,8 +173,10 @@
+ 
+ // shallow copy
+ Hash.copy = function (ref) {
+-    var hash = { __proto__ : ref.__proto__ };
++    var hash = new Object();
++    Object.setPrototypeOf(hash, Object.getPrototypeOf(ref));
+     Object.keys(ref).forEach(function (key) {
++        if (key !== '__proto__')
+         hash[key] = ref[key];
+     });
+     return hash;
+--- a/test/property.js
++++ b/test/property.js
+@@ -20,10 +20,13 @@
+     var Hash_ = context.module.exports;
+     
+     var times = 0;
+-    Hash_.__proto__.__proto__.__defineGetter__ = function () {
++    let tmp = { __defineGetter__: function() {
+         times ++;
+         return Object.__defineGetter__.apply(this, arguments);
+-    };
++    }};
++    let tmp2 = new Object();
++    Object.setPrototypeOf(tmp2, tmp);
++    Object.setPrototypeOf(Hash_, tmp2);
+     
+     assert.equal(vm.runInNewContext('Object.defineProperty', context), null);
+     
+@@ -54,11 +57,14 @@
+     vm.runInNewContext('(function () {' + src + '})()', context);
+     var Hash_ = context.module.exports;
+     
+-    Hash_.__proto__.__proto__.__defineGetter__ = function () {
++    let tmp = { __defineGetter__: function() {
+         assert.fail('getter called when a perfectly good'
+             + ' defineProperty was available'
+         );
+-    };
++    }};
++    let tmp2 = new Object();
++    Object.setPrototypeOf(tmp2, tmp);
++    Object.setPrototypeOf(Hash_, tmp2);
+     
+     assert.deepEqual(
+         Hash_({ a : 1, b : 2, c : 3 }).values,

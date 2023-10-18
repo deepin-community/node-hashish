@@ -1,3 +1,44 @@
+node-hashish (0.0.4+git34dfe43-4) unstable; urgency=medium
+
+  * Team upload
+  * Drop __proto__ calls (fixes node-optimist autopkgtest)
+
+ -- Yadd <yadd@debian.org>  Thu, 01 Dec 2022 11:56:42 +0100
+
+node-hashish (0.0.4+git34dfe43-3) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Update renamed lintian tag names in lintian overrides.
+  * Update standards version to 4.6.1, no changes needed.
+
+ -- Jelmer Vernooĳ <jelmer@debian.org>  Mon, 21 Nov 2022 12:20:26 +0000
+
+node-hashish (0.0.4+git34dfe43-2) unstable; urgency=medium
+
+  * Team upload
+
+  [ lintian-brush ]
+  * Trim trailing whitespace
+  * Use secure copyright file specification URI
+  * Bump debhelper from deprecated 9 to 13
+  * Set debhelper-compat version in Build-Depends
+  * Change priority extra to priority optional
+  * Update renamed lintian tag names in lintian overrides
+  * Set upstream metadata fields: Bug-Database, Bug-Submit, Repository,
+    Repository-Browse
+
+  [ Yadd ]
+  * Declare compliance with policy 4.6.0
+  * Add "Rules-Requires-Root: no"
+  * Change section to javascript
+  * Add debian/gbp.conf
+  * Update debian/watch to use npm registry
+  * Drop dependency to nodejs
+  * Fix VCS fields
+  * Use dh-sequence-nodejs auto install
+
+ -- Yadd <yadd@debian.org>  Sat, 15 Jan 2022 11:08:11 +0100
+
 node-hashish (0.0.4+git34dfe43-1.1) unstable; urgency=medium
 
   * Non maintainer upload by the Reproducible Builds team.
