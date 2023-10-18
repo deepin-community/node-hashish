@@ -1,4 +1,4 @@
-Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: node-hashish
 Upstream-Contact: James Halliday <mail@substack.net>
 Source: https://github.com/substack/node-hashish/

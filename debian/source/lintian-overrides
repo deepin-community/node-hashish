@@ -1,2 +1,2 @@
 # reported upstream https://github.com/substack/node-hashish/issues/14
-node-hashish source: debian-watch-may-check-gpg-signature
+node-hashish source: debian-watch-does-not-check-openpgp-signature
